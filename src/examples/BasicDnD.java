@@ -29,7 +29,7 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package main;
+package examples;
 
 /*
  * BasicDnD.java requires no other files.

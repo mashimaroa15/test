@@ -1,9 +1,9 @@
 <#if licenseFirst??>
 ${licenseFirst}
 </#if>
-${licensePrefix}Mise en place d'un langage graphique pour l'éditeur SEPIA
-${licensePrefix}MIF20 - PRIM - TER || Janvier - Février 2015
-${licensePrefix}Université Lyon 1 || Département Informatique
+${licensePrefix}Mise en place d'un langage graphique pour l'editeur SEPIA
+${licensePrefix}MIF20 - PRIM - TER || Janvier - Fevrier 2015
+${licensePrefix}Universite Lyon 1 || Departement Informatique
 <#if licenseLast??>
 ${licenseLast}
 </#if>

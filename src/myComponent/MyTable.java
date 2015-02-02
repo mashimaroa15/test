@@ -6,13 +6,8 @@
 
 package myComponent;
 
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.Transferable;
-import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.io.IOException;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -20,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Le Duc Tan NGUYEN
  */
-public class MyTable extends JTable implements MouseListener, MouseMotionListener, Transferable {
+public class MyTable extends JTable {
 
     public MyTable() {
         super();
@@ -43,59 +38,4 @@ public class MyTable extends JTable implements MouseListener, MouseMotionListene
             table.setValueAt(data[j], numRow - 1, j);
         }
     }
-
-    //MOUSE LISTENER
-    @Override
-    public void mouseClicked(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mousePressed(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void mouseExited(MouseEvent me) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    // MOUSE MOTION LISTENER
-    @Override
-    public void mouseDragged(MouseEvent me) {
-        System.out.println("mouse dragged at " + me.getX() + ":" + me.getY());
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent me) {
-
-    }
-
-    // TRANSFERABLE
-    
-    @Override
-    public DataFlavor[] getTransferDataFlavors() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean isDataFlavorSupported(DataFlavor df) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Object getTransferData(DataFlavor df) throws UnsupportedFlavorException, IOException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
 }

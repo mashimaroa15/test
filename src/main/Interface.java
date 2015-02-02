@@ -6,33 +6,47 @@
 
 package main;
 
+import java.awt.BorderLayout;
 import myComponent.MyTable;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import myComponent.MyTransferHandlerTable;
+import javax.swing.JTextArea;
+import myComponent.MyComponentEvent;
+import myComponent.MyPanel;
+import rules.Rule;
+import lib.TypeEvent;
 
 /**
  *
  * @author Le Duc Tan NGUYEN
  */
-public class Main extends javax.swing.JFrame {
+public class Interface extends javax.swing.JFrame implements Observer {
+
+    private ArrayList<Rule> listRules;
+    private Model model;
+        
+    
     /**
      * Creates new form Main
+     *
      * @param nameFrame : nom du programme principal
      */
-    public Main(String nameFrame) {
+    public Interface(String nameFrame) {
         super(nameFrame);
         initComponents();
         // Incorporer la table dans un JScrollPane
-        JScrollPane jspTable = new javax.swing.JScrollPane();
         MyTable tab = new MyTable();
         if (tab.getColumnModel().getColumnCount() > 0) {
             tab.getColumnModel().getColumn(0).setMinWidth(50);
@@ -43,37 +57,63 @@ public class Main extends javax.swing.JFrame {
             tab.getColumnModel().getColumn(2).setPreferredWidth(200);
         }
         // Définir Gestion de Glisser-Déposer pour la table
-        tab.setTransferHandler(new MyTransferHandlerTable());
+//        tab.setTransferHandler(new MyTransferHandlerTable());
+        tab.setDragEnabled(true);
+        tab.setPreferredScrollableViewportSize(new Dimension(600, 100));
+        
+        JScrollPane jspTable = new javax.swing.JScrollPane();
         jspTable.setViewportView(tab);
-        
+
         // Incorporer le canvas dans un JScrollPane
-        JScrollPane jspPnlCanvas = new javax.swing.JScrollPane();
-//        MyPanel canvas
+        MyPanel canvas = new MyPanel();
+        canvas.setPreferredSize(new Dimension(550, 250));
+        canvas.setLayout(new BorderLayout(10, 10));
+        
+        JScrollPane jspPnlCanvas = new JScrollPane();
+        jspPnlCanvas.setViewportView(canvas);
+        
+        // Dans le canvas il y aura 4 sous-panels invisibles
+        // qui serviront chacun à contenir le composant graphique
+        // et le combo box
+        // Dans chaque sous-panel il y aura
+        
+        // A IMPLEMENTER
+        
+        MyPanel pnlEvent = new MyPanel();
+        MyPanel pnlCond = new MyPanel();
+        MyPanel pnlAction = new MyPanel();
+        MyPanel pnlEnd = new MyPanel();
         
         
-        // Panel Main
+        
+        // Les composants graphiques
+        // Panel Event
+        
+        
+        JTextArea jtf = new JTextArea("test text ...");
+
+        // Panel Interface
         JPanel pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain, BoxLayout.PAGE_AXIS));
-        pnlMain.setPreferredSize(new Dimension(500, 300));
-        pnlMain.setMinimumSize(new Dimension(140, 200));
+        pnlMain.setPreferredSize(new Dimension(600, 450));
+        pnlMain.setMinimumSize(new Dimension(400, 200));
 
-        // ajouter les autres composants au Panel Main
+        // ajouter les autres composants au Panel Interface
         pnlMain.add(jspTable);
+        pnlMain.add(jspPnlCanvas);
+        pnlMain.add(jtf);
 
-        
         Image img;
         try {
-            img = ImageIO.read(new File("src/img/triangle.png"));
+            img = ImageIO.read(new File("src/img/eventInactive.png"));
 //            th.setDragImage(img);
         } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        //Incorporer 
+
+        // Incorporer les composants dans JFrame
+        pnlMain.setOpaque(true);
         this.setContentPane(pnlMain);
-        this.setMinimumSize(new Dimension(350, 500));
-        pack();
     }
 
     /**
@@ -118,21 +158,24 @@ public class Main extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Main m = new Main("Test");
+                Interface m = new Interface("Test");
                 m.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+                m.setMinimumSize(new Dimension(600, 450));
+                m.pack();
                 m.setVisible(true);
             }
         });
@@ -140,4 +183,10 @@ public class Main extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void update(Observable o, Object o1) {
+        
+        
+    }
 }

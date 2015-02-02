@@ -4,7 +4,7 @@
  * Université Lyon 1 || Département Informatique
  */
 
-package myComponent;
+package transferTools;
 
 import java.awt.Image;
 import java.awt.Point;
@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
 import javax.swing.TransferHandler;
+import myComponent.MyTable;
 
 /**
  *
