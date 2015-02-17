@@ -9,7 +9,9 @@ package myComponent;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
+import main.Model;
 import rules.Event;
+import rules.Rule;
 
 /**
  *
@@ -18,46 +20,23 @@ import rules.Event;
 public class MyPanelEvent extends MyPanel {
     
     private MyComponentEvent evt;
-    private JComboBox<Event> cb;
-
-    /**
-     * Constructeur par défaut (pour exemple)
-     */
-    public MyPanelEvent() {
-        ArrayList<Event> listE = exListEvent();
-        this.evt = new MyComponentEvent(listE.get(0));
-        this.cb = exCBEvent(listE);      
-    }
+    private JComboBox<String> cb;
     
-    /**cc
+    /**
      * Constructeur avec paramètres
      * @param evt
      * @param cb
      */
-    public MyPanelEvent(MyComponentEvent evt, JComboBox cb){
+    public MyPanelEvent(Rule rule){
         super();
-        this.evt = evt;
-        this.cb = cb;
+        this.evt = new MyComponentEvent();
+        
+        this.cb = new JComboBox<>(new String[]{"E0", "E1"});
         
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         this.setBorder(null);
         this.add(evt);
-        this.add(cb);       
-    }
-    
-    /**
-     *  Créer un exemple d'une liste des évènements (3 évènements par défaut)
-     * @return
-     */
-    public static ArrayList<Event> exListEvent(){
-        ArrayList<Event> res = new ArrayList<>();
-        for (int i = 0; i < 3; i++) {
-            String nameE = "E" + i;
-            String descE = "Clic sur le bouton 7" + i;
-            res.add(new Event(i, nameE, 1, descE));
-        }        
-        
-        return res;
+        this.add(cb);    
     }
     
     /**
@@ -80,11 +59,4 @@ public class MyPanelEvent extends MyPanel {
         this.evt = evt;
     }
 
-    public JComboBox<Event> getCb() {
-        return cb;
-    }
-
-    public void setCb(JComboBox<Event> cb) {
-        this.cb = cb;
-    }
 }

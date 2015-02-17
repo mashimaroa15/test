@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JComponent;
+import org.jdom.Element;
 import rules.Event;
 
 /**
@@ -22,23 +23,24 @@ import rules.Event;
  */
 public class MyComponentEvent extends JComponent {
     
-    private int id;
     private String name;
-    private int type;
+    private String type;
     private String desc;
     
     private Image iconActive;
     private Image iconInactive;
 
-    public MyComponentEvent(Event e) {
+    public MyComponentEvent() {
         try {
-            this.id = e.getId();
-            this.name = e.getName();
-            this.type = e.getType();
-            this.desc = e.getDesc();
+//            this.name = e.getAttributeValue("idEve");
+//            this.type = e.getAttributeValue("type");
+//            this.desc = e.getAttributeValue("idComp");
             
             iconActive = ImageIO.read(new File("src/img/eventActive.png"));
             iconInactive = ImageIO.read(new File("src/img/eventInactive.png"));
+            
+            Graphics g = this.getGraphics();
+            this.paintComponent(g, iconInactive);
             
         } catch (IOException ex) {
             Logger.getLogger(MyComponentEvent.class.getName()).log(Level.SEVERE, null, ex);
@@ -47,13 +49,19 @@ public class MyComponentEvent extends JComponent {
 
     @Override
     protected void paintComponent(Graphics grphcs) {
-        super.paintComponent(grphcs); 
+        super.paintComponent(grphcs);
         grphcs.drawImage(iconInactive, 0, 0, this);
     }
     
     protected void paintComponent(Graphics grphcs, Image img) {
         super.paintComponent(grphcs); 
         grphcs.drawImage(img, 0, 0, this);
+    }
+    
+    protected void deactivate(){
+        Graphics grphcs = this.getGraphics();
+        paintComponent(grphcs, iconActive);
+        this.repaint();
     }
 
     public String getDesc() {
@@ -80,22 +88,6 @@ public class MyComponentEvent extends JComponent {
         this.iconInactive = iconInactive;
     }
     
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
-
     public Image getIcon() {
         return iconActive;
     }

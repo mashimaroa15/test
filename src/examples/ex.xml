@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<regle id="R1">
+    <metadonnees />
+    <evenement_declencheur type="lancementRegle" idComp="R1" />
+    <alternatives condition="">
+        <alternative>
+            <action id="A0" />
+            <action id="A1" />
+            <action id="A3" />
+            <action id="A4" />
+        </alternative>
+    </alternatives>
+    <evenement_de_fin idEve="E0" type="mouseClicked" idComp="38354" />
+</regle>

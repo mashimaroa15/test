@@ -4,7 +4,7 @@
  * Université Lyon 1 || Département Informatique
  */
 
-package transferTools;
+package tools.transferTools;
 
 import javax.swing.TransferHandler;
 

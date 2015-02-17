@@ -6,15 +6,77 @@
 
 package main;
 
-import java.util.ArrayList;
+import graph.MyGraph;
+import java.awt.Dimension;
+import java.util.Observable;
 import rules.Rule;
 
 /**
  *
  * @author Le Duc Tan NGUYEN
  */
-public class Model {
+public class Model extends Observable implements Runnable {
 
-    private ArrayList<Rule> listRules;
+    private Rule rule;
+    private View view;
+    private MyGraph graph;
+
+    public Model(){
+        this.graph = new MyGraph();
+        this.rule = new Rule();
+        this.view = new View(graph, this, rule);
+        this.graph.setContainer(view);
+        
+        this.addObserver(view);
+        this.graph.init();
+    }
     
+    public static void main(String[] args) {
+        Model model = new Model();
+        
+        InterfaceJFrame itf = new InterfaceJFrame(model, "Test");
+
+        itf.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        itf.setMinimumSize(new Dimension(600, 450));
+        itf.setVisible(true);
+
+        new Thread(model).start();
+    }
+
+    @Override
+    public void run() {
+//        int updateRes = this.graph.update(rule);        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+
+    public Rule getRule() {
+        return rule;
+    }
+
+    public void setRule(Rule rule) {
+        this.rule = rule;
+    }
+
+    public View getView() {
+        return view;
+    }
+
+    public void setView(View view) {
+        this.view = view;
+    }
+
+    public MyGraph getGraph() {
+        return graph;
+    }
+
+    public void setGraph(MyGraph graph) {
+        this.graph = graph;
+    }
 }

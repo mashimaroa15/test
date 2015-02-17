@@ -11,6 +11,7 @@ import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.IOException;
 import javax.swing.JPanel;
+import rules.Rule;
 
 /**
  *
@@ -36,5 +37,8 @@ public class MyPanel extends JPanel implements Transferable {
     public Object getTransferData(DataFlavor df) throws UnsupportedFlavorException, IOException {
         return null;
     }
-
+    public void setRegle(Rule r)
+    {
+        
+    }
 }

@@ -6,33 +6,20 @@
 
 package main;
 
-import java.awt.BorderLayout;
 import myComponent.MyTable;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import myComponent.MyComponentEvent;
-import myComponent.MyPanel;
 import rules.Rule;
-import lib.TypeEvent;
+import tools.transferTools.MyTransferHandlerTable;
 
 /**
  *
  * @author Le Duc Tan NGUYEN
  */
-public class Interface extends javax.swing.JFrame implements Observer {
+public class InterfaceJFrame extends javax.swing.JFrame {
 
     private ArrayList<Rule> listRules;
     private Model model;
@@ -43,7 +30,7 @@ public class Interface extends javax.swing.JFrame implements Observer {
      *
      * @param nameFrame : nom du programme principal
      */
-    public Interface(String nameFrame) {
+    public InterfaceJFrame(Model model, String nameFrame) {
         super(nameFrame);
         initComponents();
         // Incorporer la table dans un JScrollPane
@@ -57,63 +44,33 @@ public class Interface extends javax.swing.JFrame implements Observer {
             tab.getColumnModel().getColumn(2).setPreferredWidth(200);
         }
         // Définir Gestion de Glisser-Déposer pour la table
-//        tab.setTransferHandler(new MyTransferHandlerTable());
-        tab.setDragEnabled(true);
+        tab.setTransferHandler(new MyTransferHandlerTable());
         tab.setPreferredScrollableViewportSize(new Dimension(600, 100));
         
         JScrollPane jspTable = new javax.swing.JScrollPane();
         jspTable.setViewportView(tab);
 
         // Incorporer le canvas dans un JScrollPane
-        MyPanel canvas = new MyPanel();
+        View canvas = model.getView();
         canvas.setPreferredSize(new Dimension(550, 250));
-        canvas.setLayout(new BorderLayout(10, 10));
         
         JScrollPane jspPnlCanvas = new JScrollPane();
         jspPnlCanvas.setViewportView(canvas);
-        
-        // Dans le canvas il y aura 4 sous-panels invisibles
-        // qui serviront chacun à contenir le composant graphique
-        // et le combo box
-        // Dans chaque sous-panel il y aura
-        
-        // A IMPLEMENTER
-        
-        MyPanel pnlEvent = new MyPanel();
-        MyPanel pnlCond = new MyPanel();
-        MyPanel pnlAction = new MyPanel();
-        MyPanel pnlEnd = new MyPanel();
-        
-        
-        
-        // Les composants graphiques
-        // Panel Event
-        
-        
-        JTextArea jtf = new JTextArea("test text ...");
 
-        // Panel Interface
+        // Panel InterfaceJFrame
         JPanel pnlMain = new JPanel();
         pnlMain.setLayout(new BoxLayout(pnlMain, BoxLayout.PAGE_AXIS));
-        pnlMain.setPreferredSize(new Dimension(600, 450));
+        pnlMain.setPreferredSize(new Dimension(700, 500));
         pnlMain.setMinimumSize(new Dimension(400, 200));
 
-        // ajouter les autres composants au Panel Interface
+        // ajouter les autres composants au Panel InterfaceJFrame
         pnlMain.add(jspTable);
         pnlMain.add(jspPnlCanvas);
-        pnlMain.add(jtf);
-
-        Image img;
-        try {
-            img = ImageIO.read(new File("src/img/eventInactive.png"));
-//            th.setDragImage(img);
-        } catch (IOException ex) {
-            Logger.getLogger(Interface.class.getName()).log(Level.SEVERE, null, ex);
-        }
 
         // Incorporer les composants dans JFrame
         pnlMain.setOpaque(true);
         this.setContentPane(pnlMain);
+        this.pack();
     }
 
     /**
@@ -158,25 +115,23 @@ public class Interface extends javax.swing.JFrame implements Observer {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interface.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Interface m = new Interface("Test");
-                m.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-                m.setMinimumSize(new Dimension(600, 450));
-                m.pack();
-                m.setVisible(true);
+
             }
         });
     }
@@ -184,9 +139,4 @@ public class Interface extends javax.swing.JFrame implements Observer {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void update(Observable o, Object o1) {
-        
-        
-    }
 }

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description>
+  <metadonnees>
+    <assistance nom="SA_peda" logiciel="NetBeans" type="Application Java" interface="NetBeansComplet.interface" statut="public" public="étudiants L3 IHM ou Java" />
+    <creation date_creation="30/01/2014" date_modification="10/02/2014" createur="Blandine" />
+    <personnalisation structure_profil_statique="CollegeMarieCurie.str" id_structure_profil_statique="85" />
+    <commentaires />
+  </metadonnees>
+  <regles>
+    <regle id="R0">
+      <metadonnees />
+      <evenement_declencheur type="lancementAssistance" idComp="" />
+      <alternatives condition="C0">
+        <alternative valeur="Faire cette partie">
+          <action id="R1" />
+        </alternative>
+      </alternatives>
+    </regle>
+    <regle id="R1">
+      <metadonnees />
+      <evenement_declencheur type="lancementRegle" idComp="R1" />
+      <alternatives condition="">
+        <alternative>
+          <action id="A0" />
+          <action id="A1" />
+        </alternative>
+      </alternatives>
+      <evenement_de_fin idEve="E0" type="mouseClicked" idComp="38354" />
+    </regle>
+    <regle id="R2">
+      <metadonnees />
+      <evenement_declencheur idEve="E0" type="mouseClicked" idComp="38354" />
+      <alternatives condition="C1">
+        <alternative borne_inf="0" borne_sup="0">
+          <action id="A2" />
+          <action id="A3" />
+        </alternative>
+      </alternatives>
+    </regle>
+    <regle id="R3">
+      <metadonnees />
+      <evenement_declencheur idEve="E2" type="mouseClicked" idComp="38354" duree="4000" />
+      <alternatives condition="">
+        <alternative>
+          <action id="A0" />
+        </alternative>
+      </alternatives>
+    </regle>
+    <regle id="R4">
+      <metadonnees />
+      <evenement_declencheur idEve="E3" type="declenchement" idComp="R3" />
+      <alternatives condition="">
+        <alternative>
+          <action id="A1" />
+        </alternative>
+      </alternatives>
+    </regle>
+  </regles>
+  <actions>
+    <action id="A0" type="mise en valeur">
+      <composant id="38423" type="entourer" />
+    </action>
+    <action id="A1" type="message" sous-type="textuel" assistant="">
+      <textuel>
+        <texte>&lt;html&gt;La palette de composant vous propose un large choix de composans swing et awt, classés par catégories.
+		&lt;br&gt;Les boutons se trouvent dans la catégorie Swing control.&lt;/br&gt;
+		&lt;br&gt;Faites un glisser-déposer du bouton pour l'ajouter dans votre fenêtre.&lt;/br&gt;&lt;/html&gt;</texte>
+      </textuel>
+    </action>
+    <action id="A2" type="mise en valeur" timer="3000">
+      <composant id="38423" type="entourer" />
+    </action>
+    <action id="A3" type="message" sous-type="textuel" assistant="">
+      <textuel>
+        <texte>&lt;html&gt;Un bouton a maintenant été inséré dans votre fenêtre.
+		&lt;br&gt;Ce bouton a été nommé automatiquement "jButtonX", son texte est par défaut son nom.&lt;/br&gt;
+		&lt;br&gt;Le cadre mis entouré en bleu à l'écran affiche les propriété du composant séléctionné.&lt;/br&gt;
+		&lt;br&gt;Modifiez le nom de votre bouton ainsi que son texte.&lt;/br&gt;
+		&lt;/html&gt;</texte>
+      </textuel>
+    </action>
+    <action id="A4" type="action sur l'interface" typeAuto="automatisé">
+      <evenement idComp="2442" propriete="clic" />
+    </action>
+  </actions>
+  <conditions>
+    <condition id="C0" type="consultation">
+      <texte>Souhaitez-vous apprendre à ajouter des composants dans une fenêtre?
+
+Dans cette partie, nous allons:
+-Ajouter une bouton et modifier ces propriétés
+-Ajouter un menu, avec des onglets et des raccourcis clavier
+-Ajouter une image dans le projet et apprendre à l'utiliser</texte>
+      <titre>Tutoriel : ajout de composants</titre>
+      <policeMessage nom="Dialog" style="1" taille="12" />
+      <policeOptions nom="Dialog" style="1" taille="12" />
+      <couleur police="sun.swing.PrintColorUIResource[r=51,g=51,b=51]" fond="java.awt.Color[r=255,g=255,b=255]" />
+      <options>
+        <option label="Faire cette partie" />
+        <option label="Ne pas faire cette partie" />
+      </options>
+    </condition>
+    <condition id="C1" type="historique" objet="R2" sous-type="nombre de déclenchements" portee="seance" />
+    <condition id="C2" type="historique" objet="R1" sous-type="nombre de déclenchements" portee="seance" />
+    <condition id="C3" type="combinaison" formule="C1(0...0)" />
+    <condition id="C3" type="combinaison" formule="C2(1...1)||C1(0...0)" />
+    <condition id="C4" type="contexte" idComp="38421" propriete="a le focus" sous-type="booléen" />
+  </conditions>
+  <evenements>
+    <evenement typeEve="action utilisateur" id="E0" type="mouseClicked" idComp="38354" />
+    <evenement id="E1" typeEve="timer fixe" duree="5000" unite="secondes" />
+    <evenement id="E2" typeEve="timer relatif" sous-typeEve="evenement" objet="E0" duree="4000" unite="secondes" />
+    <evenement typeEve="evenement assistance" id="E3" type="declenchement" objet="R3" />
+    <evenement id="E4" typeEve="timer relatif" sous-typeEve="evenement" objet="E3" duree="1000" unite="secondes" />
+  </evenements>
+  <sequences />
+</description>
+
