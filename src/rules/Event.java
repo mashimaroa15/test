@@ -7,6 +7,7 @@
 package rules;
 
 import java.util.ArrayList;
+import org.jdom.Element;
 
 /**
  *
@@ -14,44 +15,45 @@ import java.util.ArrayList;
  */
 public class Event {
     
-    private int id;
-    private String name;
-    private int type;
-    private String desc;    
+    public static final String TYPE_DECLENCHEUR = "declenchement";
+    public static final String TYPE_LANCE_ASSIST = "lancementAssistance";
+    public static final String TYPE_LANCE_REGLE = "lancementRegle";
+    public static final String TYPE_MOUSE_CLICKED = "mouseClicked";
+    
+    private String id;
+    private String type;
+    private String desc;
+    
+    private Element eventElement;
 
-    public Event(int id, String name, int type, String desc) {
+    public Event(String id, String type, String desc, Element e) {
         this.id = id;
-        this.name = name;
         this.type = type;
         this.desc = desc;
+        this.eventElement = e;
     }
 
     @Override
     public String toString() {
-        return this.name;
+        if (this.id == null) {
+            return this.type;
+        }
+        return this.id;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(int type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -62,6 +64,12 @@ public class Event {
     public void setDesc(String desc) {
         this.desc = desc;
     }
-    
-    
+
+    public Element getElement() {
+        return eventElement;
+    }
+
+    public void setElement(Element element) {
+        this.eventElement = element;
+    }
 }

@@ -8,12 +8,15 @@ package main;
 
 import myComponent.MyTable;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import rules.Rule;
 import tools.transferTools.MyTransferHandlerTable;
+
 
 /**
  *
@@ -21,9 +24,9 @@ import tools.transferTools.MyTransferHandlerTable;
  */
 public class InterfaceJFrame extends javax.swing.JFrame {
 
-    private ArrayList<Rule> listRules;
+    private ArrayList<String> listRules;
     private Model model;
-        
+    JComboBox<String> chooseRuleJComboBox;
     
     /**
      * Creates new form Main
@@ -32,7 +35,8 @@ public class InterfaceJFrame extends javax.swing.JFrame {
      */
     public InterfaceJFrame(Model model, String nameFrame) {
         super(nameFrame);
-        initComponents();
+        this.model = model;
+//        initComponents();
         // Incorporer la table dans un JScrollPane
         MyTable tab = new MyTable();
         if (tab.getColumnModel().getColumnCount() > 0) {
@@ -66,6 +70,25 @@ public class InterfaceJFrame extends javax.swing.JFrame {
         // ajouter les autres composants au Panel InterfaceJFrame
         pnlMain.add(jspTable);
         pnlMain.add(jspPnlCanvas);
+        
+        listRules = new ArrayList<>();
+        listRules.add("Choisir une règle pour afficher...");
+        for (int i = 1; i < 5; i++) {
+            String name = "R"+i;
+            listRules.add(name);
+        }
+        
+        
+        chooseRuleJComboBox = new JComboBox(listRules.toArray());
+        chooseRuleJComboBox.setSelectedIndex(0);
+        chooseRuleJComboBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                chooseRuleJComboBoxActionPerformed(ae);
+            }
+        });
+        
+        pnlMain.add(chooseRuleJComboBox);
 
         // Incorporer les composants dans JFrame
         pnlMain.setOpaque(true);
@@ -134,6 +157,16 @@ public class InterfaceJFrame extends javax.swing.JFrame {
 
             }
         });
+    }
+    
+    public void chooseRuleJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {
+        String selectedRule = (String) this.chooseRuleJComboBox.getSelectedItem();
+        System.out.println(selectedRule);
+        if (selectedRule.equalsIgnoreCase("Choisir une règle pour afficher...")) {
+            this.model.getRule().changeRule(null);
+        } else {
+            this.model.getRule().changeRule(selectedRule);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

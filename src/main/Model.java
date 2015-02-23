@@ -15,7 +15,7 @@ import rules.Rule;
  *
  * @author Le Duc Tan NGUYEN
  */
-public class Model extends Observable implements Runnable {
+public class Model implements Runnable {
 
     private Rule rule;
     private View view;
@@ -23,11 +23,9 @@ public class Model extends Observable implements Runnable {
 
     public Model(){
         this.graph = new MyGraph();
-        this.rule = new Rule();
-        this.view = new View(graph, this, rule);
-        this.graph.setContainer(view);
-        
-        this.addObserver(view);
+        this.view = new View(graph);
+        this.rule = new Rule(null, view);
+        this.graph.setContainer(view);        
         this.graph.init();
     }
     
@@ -45,7 +43,7 @@ public class Model extends Observable implements Runnable {
 
     @Override
     public void run() {
-//        int updateRes = this.graph.update(rule);        
+        int updateRes = this.graph.updateRuleChanged(rule);        
     }
     
     

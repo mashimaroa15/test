@@ -10,6 +10,7 @@
     <regle id="R0">
       <metadonnees />
       <evenement_declencheur type="lancementAssistance" idComp="" />
+      <evenement_declencheur idEve="E10" type="mouseClicked" idComp="38354" />
       <alternatives condition="C0">
         <alternative valeur="Faire cette partie">
           <action id="R1" />
@@ -23,19 +24,27 @@
         <alternative>
           <action id="A0" />
           <action id="A1" />
+          <action id="A9" />
         </alternative>
       </alternatives>
-      <evenement_de_fin idEve="E0" type="mouseClicked" idComp="38354" />
+      <evenement_de_fin idEve="E10" type="mouseClicked" idComp="38354" />
     </regle>
     <regle id="R2">
       <metadonnees />
       <evenement_declencheur idEve="E0" type="mouseClicked" idComp="38354" />
+      <evenement_declencheur idEve="E0" type="mouseClicked" idComp="38354" />
       <alternatives condition="C1">
-        <alternative borne_inf="0" borne_sup="0">
+        <alternative borne_inf="0" borne_sup="2">
           <action id="A2" />
           <action id="A3" />
+          <action id="A7" />
+        </alternative>
+        <alternative borne_inf="2" borne_sup="4">
+          <action id="A1" />
+          <action id="A5" />
         </alternative>
       </alternatives>
+      <evenement_de_fin idEve="E0" type="mouseClicked" idComp="38354" />
     </regle>
     <regle id="R3">
       <metadonnees />
@@ -43,6 +52,12 @@
       <alternatives condition="">
         <alternative>
           <action id="A0" />
+        </alternative>
+      </alternatives>
+      <alternatives condition="C10">
+        <alternative>
+          <action id="A0" />
+          <action id="A10" />
         </alternative>
       </alternatives>
     </regle>

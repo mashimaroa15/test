@@ -30,6 +30,8 @@ import javax.swing.TransferHandler;
  * @author Le Duc Tan NGUYEN
  */
 public class MyGraphHandler extends mxGraphHandler {
+    
+    String filePath = "src/examples/ex.xml";
 
     public MyGraphHandler(mxGraphComponent graphComponent) {
         super(graphComponent);
@@ -150,5 +152,9 @@ public class MyGraphHandler extends mxGraphHandler {
                 (isCloneEnabled()) ? DnDConstants.ACTION_COPY_OR_MOVE
                         : DnDConstants.ACTION_MOVE, dragGestureListener);
     }
-
+    
+    public void updateXML() {
+        
+    }
+    
 }

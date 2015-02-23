@@ -56,6 +56,7 @@ public class MyTransferHandlerGraph extends com.mxgraph.swing.handler.mxGraphTra
                         comp.getGraph().getModel().endUpdate();
                         comp.getGraph().refresh();
                         //result = importGraphTransferable(graphComponent, gt);
+                        System.out.println("Import completed : " + gt.getId());
                     }
 
                 }
@@ -79,12 +80,11 @@ public class MyTransferHandlerGraph extends com.mxgraph.swing.handler.mxGraphTra
             return false;
         }
         mxCell cell = (mxCell) o;
-        mxCell ce = (mxCell) cell;
         if (cell == null) {
             System.out.println("Cell null cannot import");
             return false;
         } else {
-            if (ce.isEdge()) {
+            if (cell.isEdge()) {
                 System.out.println("Edge, cannot import");
                 return false;
             }
@@ -103,13 +103,12 @@ public class MyTransferHandlerGraph extends com.mxgraph.swing.handler.mxGraphTra
 
     @Override
     public Transferable createTransferable(JComponent jc) {
+        DataVertexTransferable tf = null;
+        Point mousePos = jc.getMousePosition();
+        mxGraphComponent comp = (mxGraphComponent) jc;
+        Object o = comp.getCellAt((int) mousePos.getX(), (int) mousePos.getY());
+        
 
-        DataEvtTransferable tf;
-        MyTable tab = (MyTable)jc;
-        int row = tab.getSelectedRow();
-        tf = new DataEvtTransferable((String) tab.getValueAt(row, 0),
-                (String) tab.getValueAt(row, 1),
-                (String) tab.getValueAt(row, 2));
         return tf;
     }
 }

@@ -51,40 +51,16 @@ public class MyTransferHandlerTable extends TransferHandler {
         MyTable tab = (MyTable)jc;
         String val = (String) tab.getValueAt(tab.getSelectedRow(), 0);
         System.out.println("Click on item that id is : " + val);
-        return tab.getTransferable();
+        DataEvtTransferable tf;
+        int row = tab.getSelectedRow();
+        tf = new DataEvtTransferable((String) tab.getValueAt(row, 0),
+                (String) tab.getValueAt(row, 1),
+                (String) tab.getValueAt(row, 2));
+        return tf;
     }
 
     @Override
     public int getSourceActions(JComponent jc) {
         return LINK;
     }
-
-//    @Override
-//    public void mouseClicked(MouseEvent me) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void mousePressed(MouseEvent me) {
-//        System.out.println("Mouse clicked on Table !!!");
-//        JComponent tab = (JComponent)me.getSource();
-//        TransferHandler th = tab.getTransferHandler();
-//        th.exportAsDrag(tab, me, COPY);
-//    }
-//
-//    @Override
-//    public void mouseReleased(MouseEvent me) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void mouseEntered(MouseEvent me) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//
-//    @Override
-//    public void mouseExited(MouseEvent me) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-//    }
-//    
 }
